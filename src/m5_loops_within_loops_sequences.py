@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in SEQUENCES-OF-SUBSEQUENCES problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Hao Jiang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -71,6 +71,20 @@ def run_test_integers():
     print('Expected is:', expected)
     print('Actual is:  ', answer)
 
+    # Test 2:
+    expected = [10, 10, 1, 3, 4, 30, -4]
+    answer = integers([(3.5, 3.14, 4/2),
+                       (10, 'hi', 10), [],
+                       [1, 2.5, 3, 4],
+                       'hello',
+                       [],
+                       ['oops'],
+                       [[55], [44]],
+                       [30, -4]
+                       ])
+    print('Expected is:', expected)
+    print('Actual is:  ', answer)
+
 
 def integers(sequence_of_sequences):
     """
@@ -94,8 +108,15 @@ def integers(sequence_of_sequences):
       :type sequence_of_sequences: (list|tuple) of (list|tuple|string)
       :rtype: list of int
     """
+    seq = []
+    for i in range(len(sequence_of_sequences)):
+        if len(sequence_of_sequences[i]) != 0:
+            for j in range(len(sequence_of_sequences[i])):
+                if type(sequence_of_sequences[i][j]) is int:
+                    seq = seq + [sequence_of_sequences[i][j]]
+    return seq
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -159,6 +180,28 @@ def run_test_big_letters():
     print('Expected is:', expected)
     print('Actual is:  ', answer)
 
+    # Test 2:
+    expected = ''
+    answer = big_letters([(3, 1, 4),  # not a string
+                          'ok what is this?',  #
+                          (10, 'ok what is this?', 10),  # not a string
+                          [],  # not a string
+                          ['oops'],  # not a string
+                          'oops',  #
+                          ['OOPS'],  # not a string
+                          '1 oops !',  #
+                          'a',  #
+                          'oops $$&*#%&&',  #
+                          'b',  #
+                          'oops',  #
+                          'c',  #
+                          'oops'  # 
+                          'd',  #
+                          'oops'  #
+                          ])
+    print('Expected is:', expected)
+    print('Actual is:  ', answer)
+
 
 def big_letters(sequence_of_sequences):
     """
@@ -188,8 +231,16 @@ def big_letters(sequence_of_sequences):
 
     Precondition:  the given argument is a sequence of sequences.
     """
+    string = ''
+    for i in range(len(sequence_of_sequences)):
+        if len(sequence_of_sequences[i]) != 0:
+            if type(sequence_of_sequences[i]) is str:
+                for j in range(len(sequence_of_sequences[i])):
+                    if sequence_of_sequences[i][j].isupper():
+                        string = string + sequence_of_sequences[i][j]
+    return string
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     ####################################################################
