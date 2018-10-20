@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  SEQUENCES.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Hao Jiang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -35,8 +35,8 @@ import rosegraphics as rg
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_practice_problem4a()
-    run_test_practice_problem4b()
+    #run_test_practice_problem4a()
+    #run_test_practice_problem4b()
     run_test_practice_problem4c()
     run_test_practice_problem4d()
 
@@ -133,8 +133,14 @@ def practice_problem4a(sequence):
     Type hints:
       :type sequence: list | tuple | string
     """
+    seq = []
+    for k in range(len(sequence)):
+        if k > 0:
+            if sequence[k] == sequence[k - 1]:
+                seq = seq + [k - 1]
+    return seq
     ####################################################################
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
@@ -196,8 +202,14 @@ def practice_problem4b(sequence):
     Type hints:
       :type sequence: (list | tuple) of (float | int)
     """
+    largest = sequence[0]
+    for k in range(0, len(sequence), 2):
+        if sequence[k] > largest:
+            largest = sequence[k]
+    return largest
+
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
@@ -294,6 +306,13 @@ def practice_problem4c(points):
       :type points: tuple of rg.Point
       :rtype: rg.Point | string
     """
+    for k in range(len(points)):
+        if is_prime(points[k].x) and is_prime(points[k].y):
+            return_x = points[k].y
+            return_y = points[k].x
+            swap_point = rg.Point(return_x, return_y)
+            return swap_point
+    return 'Not found'
     ####################################################################
     # TODO: 4. Implement and test this function.
     #     The testing code is already written for you (above).
@@ -390,8 +409,14 @@ def practice_problem4d(sequence):
       :type sequence: (list | tuple) of int
       :rtype: int
     """
+    total = 0
+    for k in range(1, len(sequence)):
+        if is_prime(sequence[k]) and sequence[k] != sequence[k - 1] and is_prime(sequence[k - 1]):
+            total = total + sequence[k - 1]
+    return total
+
     ####################################################################
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)

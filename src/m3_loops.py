@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  FOR and WHILE loops.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Hao Jiang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -134,7 +134,17 @@ def run_test_practice_problem3():
     # SUGGESTION: Ask an assistant to CHECK your tests to confirm
     #             that they are adequate tests!
     ####################################################################
+    # Test 15:
+    expected15 = [1, 7]
+    actual15 = practice_problem3(-5, 2, 1.25)
+    print('  Expected:', expected15)
+    print('  Actual:  ', actual15)
 
+    # Test 16:
+    expected16 = [-5, -4, -3, -2]
+    actual16 = practice_problem3(-5, 4, -100)
+    print('  Expected:', expected16)
+    print('  Actual:  ', actual16)
 
 def practice_problem3(start, n, threshold):
     """
@@ -207,8 +217,22 @@ def practice_problem3(start, n, threshold):
       :type n:     int
       :type threshold: float
     """
+    seq = []
+    count = 0
+    x = start
+
+    while True:
+        if count >= n:
+            break
+        if math.sin(x) + math.cos(x) > threshold:
+            seq = seq + [x]
+            count = count + 1
+        x = x + 1
+    return seq
+
+
     ####################################################################
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Some tests are already written for you (above),
     #          but you are required to write ADDITIONAL tests (above).
     ####################################################################
