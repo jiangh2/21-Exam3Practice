@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in 2D GRAPHICS problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Hao Jiang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -29,11 +29,12 @@ Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
 ########################################################################
 
 import rosegraphics as rg
+import math
 
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_hourglass()
+    #run_test_hourglass()
     run_test_many_hourglasses()
 
 
@@ -88,8 +89,43 @@ def hourglass(window, n, point, radius, color):
     where n and radius are positive and color is a string that denotes
     a color that rosegraphics understands.
     """
+    up_left_x = point.x
+    up_left_y = point.y
+    down_left_x = point.x
+    down_left_y = point.y
+    for i in range(n):
+        for j in range(i + 1):
+            circle_up = rg.Circle(rg.Point(up_left_x, up_left_y), radius)
+            circle_down = rg.Circle(rg.Point(down_left_x, down_left_y), radius)
+            up_line_left_x = circle_up.center.x - radius
+            up_line_left_y = circle_up.center.y
+            up_line_right_x = circle_up. center.x + radius
+            up_line_right_y = circle_up.center.y
+            down_line_left_x = circle_down.center.x - radius
+            down_line_left_y = circle_down.center.y
+            down_line_right_x = circle_down.center.x + radius
+            down_line_right_y = circle_down.center.y
+            line_up = rg.Line(rg.Point(up_line_left_x, up_line_left_y), rg.Point(up_line_right_x, up_line_right_y))
+            line_down = rg.Line(rg.Point(down_line_left_x, down_line_left_y), rg.Point(down_line_right_x, down_line_right_y))
+            circle_up.attach_to(window)
+            circle_down.attach_to(window)
+            circle_up.fill_color = color
+            circle_down.fill_color = color
+            line_up.attach_to(window)
+            line_down.attach_to(window)
+            window.render()
+            up_left_x = up_left_x + 2 * radius
+            up_left_y = up_left_y
+            down_left_x = down_left_x + 2 * radius
+            down_left_y = down_left_y
+
+
+        up_left_x = point.x - radius * (i + 1)
+        up_left_y = point.y - radius * math.sqrt(3) * (i + 1)
+        down_left_x = point.x - radius * (i + 1)
+        down_left_y = point.y + radius * math.sqrt(3) * (i + 1)
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #       We provided some tests for you (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -162,8 +198,31 @@ def many_hourglasses(window, square, m, colors):
     where m is positive and colors is a sequence of strings,
     each of which denotes a color that rosegraphics understands.
     """
+
+    radius = square.length_of_each_side / 2
+    corner_1_x = square.center.x - radius
+    corner_1_y = square.center.y - radius
+    corner_2_x = square.center.x + radius
+    corner_2_y = square.center.y + radius
+    corner_1 = rg.Point(corner_1_x, corner_1_y)
+    corner_2 = rg.Point(corner_2_x, corner_2_y)
+    point = square.center
+    for i in range(m):
+        color = colors[i % len(colors)]
+        rect = rg.Rectangle(corner_1, corner_2)
+        rect.attach_to(window)
+        hourglass(window, i + 1, point, radius, color)
+        corner_1_x = corner_1_x + (i + 1) * radius * 2
+        corner_1_y = corner_1_y - math.sqrt(3) * radius
+        corner_2_x = corner_2_x + (i + 2) * radius * 2
+        corner_2_y = corner_2_y + math.sqrt(3) * radius
+        corner_1 = rg.Point(corner_1_x, corner_1_y)
+        corner_2 = rg.Point(corner_2_x, corner_2_y)
+        point_x = (corner_1_x + corner_2_x) / 2
+        point_y = (corner_1_y + corner_2_y) / 2
+        point = rg.Point(point_x, point_y)
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #       We provided some tests for you (above).
     # ------------------------------------------------------------------
     ####################################################################
