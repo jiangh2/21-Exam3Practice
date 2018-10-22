@@ -306,13 +306,24 @@ def practice_problem4c(points):
       :type points: tuple of rg.Point
       :rtype: rg.Point | string
     """
+    #for k in range(len(points)):
+    #    if is_prime(points[k].x) and is_prime(points[k].y):
+    #        return_x = points[k].y
+    #        return_y = points[k].x
+    #        swap_point = rg.Point(return_x, return_y)
+    #        return swap_point
+    #return 'Not found'
+
     for k in range(len(points)):
         if is_prime(points[k].x) and is_prime(points[k].y):
-            return_x = points[k].y
-            return_y = points[k].x
-            swap_point = rg.Point(return_x, return_y)
+            temp = points[k].y
+            points[k].y = points[k].x
+            points[k].x = temp
+            swap_point = rg.Point(points[k].x, points[k].y)
             return swap_point
     return 'Not found'
+
+
     ####################################################################
     # TODO: 4. Implement and test this function.
     #     The testing code is already written for you (above).
